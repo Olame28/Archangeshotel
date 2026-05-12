@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // Utilise l'URL Vercel Postgres
+  directUrl = env("POSTGRES_URL_NON_POOLING") // Utilise l'URL directe pour les migrations
+}
+
+model Room {
+  id           Int           @id @default(autoincrement())
+  name         String
+  type         String        // 'standard', 'deluxe', 'vip'
+  price        Float
+  description  String?
+  image        String?
+  amenities    String?       // Stocké sous forme de chaîne séparée par des virgules
+  reservations Reservation[]
+}
+
+model Hall {
+  id           Int           @id @default(autoincrement())
+  name         String
+  capacity     Int
+  price        Float         @default(0) // Nouveau: Gestion du prix des salles
+  description  String?
+  image        String?
+  reservations Reservation[]
+}
+
+model Reservation {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  // Client info
+  firstName        String
+  lastName         String
+  email            String
+  phone            String
+  countryOfOrigin  String?
+  nationality      String?
+  idDocument       String?
+  cityOfProvenance String?
+  
+  // Stay info
+  type             String   // 'room', 'restaurant', 'event', 'photoshoot'
+  checkin          DateTime
+  checkout         DateTime
+  guests           Int      @default(1)
+  stayPurpose      String?
+  
+  // Relations
+  room             Room?    @relation(fields: [roomId], references: [id])
+  roomId           Int?
+  hall             Hall?    @relation(fields: [hallId], references: [id])
+  hallId           Int?
+  
+  // Communication
+  message          String?
+  adminNotes       String?   // Nouveau: Notes internes pour le staff
+  repliedAt        DateTime? // Nouveau: Date de la dernière réponse envoyée
+  
+  // Other info
+  paymentMode      String   // 'private', 'company'
+  companyName      String?
+  companyContact   String?
+  status           String   @default("PENDING") // 'PENDING', 'CONFIRMED', 'CANCELLED'
+  
+  lang             String   @default("fr")
+}
