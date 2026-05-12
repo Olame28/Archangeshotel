@@ -17,8 +17,8 @@ async function main() {
   }
 
   const halls = [
-    { id: 1, name: "Salle Malaika", capacity: 100, description: "Réunions & Séminaires" },
-    { id: 2, name: "Salle Arche de Noé", capacity: 500, description: "Mariages & Grands événements" },
+    { id: 1, name: "Salle Malaika", capacity: 100, price: 200, description: "Réunions & Séminaires" },
+    { id: 2, name: "Salle Arche de Noé", capacity: 500, price: 500, description: "Mariages & Grands événements" },
   ];
 
   for (const hall of halls) {
@@ -29,7 +29,7 @@ async function main() {
     });
   }
 
-  console.log("Database seeded!");
+  console.log("Database seeded successfully!");
 }
 
 main()
