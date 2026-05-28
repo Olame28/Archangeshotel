@@ -118,56 +118,66 @@ export function Events() {
               </div>
             </div>
 
-            <ul className="flex flex-col gap-4">
+            <ul className="grid gap-8 md:grid-cols-2">
               {pastEvents.map((event, idx) => {
                 const hasVideo = Boolean(event.isVideo && youtubeIdFromEvent(event));
                 const label = hasVideo ? t("events.open_video") : t("events.open_album");
                 return (
                   <motion.li
                     key={event.id}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.06 }}
+                    transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
+                    whileHover={{ y: -8 }}
                   >
                     <button
                       type="button"
                       onClick={() => openViewer(event)}
-                      className="group flex w-full gap-5 rounded-2xl border border-navy/10 bg-white p-4 text-left shadow-md transition hover:border-gold/40 hover:shadow-lg sm:gap-6 sm:p-6"
+                      className="group relative w-full rounded-3xl overflow-hidden bg-white shadow-2xl transition-all hover:shadow-3xl hover:shadow-gold/10"
                     >
-                      <div className="relative h-28 w-36 shrink-0 overflow-hidden rounded-xl sm:h-32 sm:w-44">
+                      <div className="relative aspect-[16/10] overflow-hidden">
                         <Image
                           src={event.image}
                           alt=""
                           fill
-                          className="object-cover transition duration-500 group-hover:scale-105"
-                          sizes="180px"
+                          className="object-cover transition duration-700 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent" />
+                        
                         {hasVideo && (
-                          <span className="absolute inset-0 flex items-center justify-center bg-navy/35 transition group-hover:bg-navy/25">
-                            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold text-navy shadow-lg">
-                              <Play className="ml-0.5 h-5 w-5 fill-current" />
+                          <span className="absolute inset-0 flex items-center justify-center bg-navy/30 transition group-hover:bg-navy/20">
+                            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold/95 backdrop-blur-sm text-navy shadow-2xl transition-transform group-hover:scale-110">
+                              <Play className="ml-1 h-10 w-10 fill-current" />
                             </span>
                           </span>
                         )}
                       </div>
-                      <div className="min-w-0 flex-1 py-0.5">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[11px] font-bold uppercase tracking-widest text-gold">{event.date}</span>
-                          <span className="rounded-full bg-navy/5 px-2 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider text-navy/55">
+
+                      <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <span className="bg-gold/95 backdrop-blur-sm px-4 py-2 rounded-full font-sans text-xs font-bold uppercase tracking-widest text-navy shadow-lg">
+                            {event.date}
+                          </span>
+                          <span className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full font-sans text-[10px] font-bold uppercase tracking-wider text-navy shadow-md">
                             {hasVideo ? t("events.badge_video") : t("events.badge_album")}
-                            {typeof event.photoCount === "number" && !hasVideo ? ` · ${event.photoCount}` : ""}
+                            {typeof event.photoCount === "number" && !hasVideo ? ` · ${event.photoCount} photos` : ""}
                           </span>
                         </div>
-                        <h4 className="mt-2 font-serif text-xl text-navy sm:text-2xl">{event.title}</h4>
-                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-navy/65 sm:line-clamp-3">
+                        
+                        <h4 className="font-serif text-2xl sm:text-3xl text-white mb-3 drop-shadow-lg">{event.title}</h4>
+                        <p className="font-sans text-sm leading-relaxed text-white/90 line-clamp-2 sm:line-clamp-3 drop-shadow">
                           {event.description}
                         </p>
-                        <span className="mt-4 inline-flex items-center gap-2 font-sans text-[11px] font-bold uppercase tracking-widest text-navy transition group-hover:text-gold">
-                          {hasVideo ? <Play className="h-3.5 w-3.5" /> : <Images className="h-3.5 w-3.5" />}
+                        
+                        <div className="mt-6 flex items-center gap-2 text-gold font-sans text-xs font-bold uppercase tracking-widest">
+                          {hasVideo ? <Play className="h-4 w-4" /> : <Images className="h-4 w-4" />}
                           {label}
-                        </span>
+                        </div>
                       </div>
+
+                      <div className="absolute inset-0 border-4 border-transparent group-hover:border-gold/30 transition-all duration-500 rounded-3xl" />
                     </button>
                   </motion.li>
                 );

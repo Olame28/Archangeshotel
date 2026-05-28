@@ -119,8 +119,13 @@ export function Establishment() {
       </section>
 
       {/* Menu Africain */}
-      <section className="relative bg-cream-dark py-20 sm:py-28 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-cream via-cream-dark to-cream py-20 sm:py-28 overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gold rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-navy rounded-full blur-3xl" />
+        </div>
+        
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="mb-16 text-center">
               <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
@@ -136,54 +141,63 @@ export function Establishment() {
             </div>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {RESTAURANT_MENU.map((dish, idx) => (
               <motion.div
                 key={dish.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="group relative h-64 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer"
+                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative h-96 rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
               >
-                <Image
-                  src={dish.image}
-                  alt={dish.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/60 to-navy/20" />
-                
-                <div className="absolute inset-0 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div>
-                    <p className="font-sans text-xs text-gold/80 uppercase tracking-widest mb-2">{dish.category}</p>
-                    <p className="font-sans text-sm text-white/90 leading-relaxed mb-4 line-clamp-3">{dish.description}</p>
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={dish.image}
+                    alt={dish.name}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
+                  
+                  <div className="absolute top-4 right-4 bg-gold/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                    <span className="font-sans text-xs font-bold uppercase tracking-widest text-navy">
+                      {dish.category}
+                    </span>
                   </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="text-2xl mb-1">{(dish as any).icon}</div>
-                      <h3 className="font-serif text-lg text-white">{dish.name}</h3>
+                <div className="p-6">
+                  <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors">
+                    {dish.name}
+                  </h3>
+                  <p className="font-sans text-sm leading-relaxed text-navy/70 mb-4 line-clamp-2">
+                    {dish.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between pt-4 border-t border-navy/10">
+                    <div className="flex items-baseline gap-1">
+                      <span className="font-serif text-3xl font-bold text-gold">${dish.price}</span>
                     </div>
-                    <div className="text-right">
-                      <p className="font-sans text-xs text-white/70">À partir de</p>
-                      <span className="font-serif text-2xl font-bold text-gold">${dish.price}</span>
+                    <div className="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold group-hover:text-navy transition-all">
+                      <ArrowRight className="h-5 w-5 text-navy/60 group-hover:text-navy" />
                     </div>
                   </div>
                 </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Link
               href="/reservation"
-              className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-navy px-8 font-sans text-sm font-bold tracking-widest text-cream transition hover:bg-navy-light active:scale-95 shadow-lg"
+              className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-full bg-gradient-to-r from-navy to-navy-light px-12 font-sans text-sm font-bold uppercase tracking-widest text-cream transition-all hover:scale-105 hover:shadow-2xl hover:shadow-gold/20 active:scale-95"
             >
-              Réserver une Table <ArrowRight className="h-4 w-4" />
+              Réserver une Table <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
         </div>

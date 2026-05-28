@@ -27,24 +27,28 @@
 
 export const HOTEL_LOGO = "/logo-archanges.png";
 
-// HERO - Photos du carrousel accueil (1 image)
+// HERO - Photos du carrousel accueil (6 images)
 // Dimensions recommandées : 1920 x 1080 px (16:9), < 500 Ko
 export const HERO_IMAGES = [
   "/images/hotel/hotel-1.jpg",
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80",
+  "/images/hotel/hotel-2.jpg",
+  "/images/hotel/hotel-3.jpg",
+  "/images/hotel/hotel-4.jpg",
+  "/images/hotel/hotel-5.jpg",
+  "/images/hotel/hotel-6.jpg",
 ];
 
-// GALERIE - Photos pour la galerie (8 images, grille 4x2)
-// Dimensions recommandées : 800 x 800 px (1:1 carré), < 200 Ko chaque
+// GALERIE - Photos pour la galerie (8 images, grille masonry)
+// Dimensions recommandées : 1200 x 800 px (3:2) ou carré, < 300 Ko chaque
 export const GALLERY_IMAGES = [
-  "/images/gallery/gallery-1.png",
-  "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1551882547-ff43c63ebe5e?auto=format&fit=crop&w=800&q=80",
+  "/images/gallery/gallery-1.jpg",
+  "/images/gallery/gallery-2.jpg",
+  "/images/gallery/gallery-3.jpg",
+  "/images/gallery/gallery-4.jpg",
+  "/images/gallery/gallery-5.jpg",
+  "/images/gallery/gallery-6.jpg",
+  "/images/gallery/gallery-7.jpg",
+  "/images/gallery/gallery-8.jpg",
 ];
 
 // RESTAURANT - Photos pour l'album restaurant Maman Rica
