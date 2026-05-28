@@ -72,7 +72,7 @@ export function LakeKivu() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] shadow-2xl">
               <Image
                 src={sideImage}
-                alt="Vue panoramique sur le lac Kivu"
+                alt="Archanges Hôtel Minova - Vue panoramique sur le lac Kivu, hôtel de luxe au Sud-Kivu RDC"
                 fill
                 className="object-cover transition duration-1000 hover:scale-110"
                 sizes="(max-width: 1024px) 100vw, 50vw"

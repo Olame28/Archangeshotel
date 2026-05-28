@@ -85,7 +85,7 @@ export function Gallery() {
               >
                 <Image
                   src={GALLERY_IMAGES[currentIndex]}
-                  alt={`Galerie ${currentIndex + 1}`}
+                  alt={`Archanges Hôtel Minova - Photo galerie ${currentIndex + 1}, hôtel de luxe au lac Kivu Sud-Kivu`}
                   fill
                   className="object-cover"
                   priority

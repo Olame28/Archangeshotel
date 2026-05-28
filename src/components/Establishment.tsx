@@ -61,7 +61,7 @@ export function Establishment() {
             >
               <Image
                 src={restaurantImg}
-                alt="Restaurant Maman Rica"
+                alt="Archanges Hôtel Minova - Restaurant Maman Rica, gastronomie au lac Kivu Sud-Kivu"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

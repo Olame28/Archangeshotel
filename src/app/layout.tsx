@@ -19,19 +19,34 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://archangeshotel.com"),
   title: {
-    default: "Archanges Hôtel — Luxe au lac Kivu | Sud-Kivu",
-    template: "%s | Archanges Hôtel",
+    default: "Archanges Hôtel Minova — Hôtel de luxe au lac Kivu, Sud-Kivu RDC",
+    template: "%s | Archanges Hôtel Minova",
   },
   description:
-    "Hébergement haut de gamme à Minova, Budondo. Admirez le lac Kivu, excursions, gastronomie. Notre différence, votre référence.",
+    "Archanges Hôtel : Hébergement haut de gamme à Minova, Sud-Kivu. Hôtel de luxe au bord du lac Kivu avec chambres, restaurant, événements. Réservez votre séjour.",
+  keywords: ["archanges", "archanges hotel", "hotel minova", "lac kivu", "sud kivu", "hotel luxe", "hebergement rdc", "hotel budondo", "archanges minova"],
   openGraph: {
-    title: "Archanges Hôtel — Luxe au lac Kivu",
+    title: "Archanges Hôtel Minova — Hôtel de luxe au lac Kivu",
     description:
-      "Séjour d'exception au bord du lac Kivu. Réservations, excursions, services premium.",
+      "Découvrez Archanges Hôtel, l'hôtel de luxe de Minova au bord du lac Kivu. Chambres premium, restaurant gastronomique, événements. Réservation en ligne.",
     url: "https://archangeshotel.com",
-    siteName: "Archanges Hôtel",
+    siteName: "Archanges Hôtel Minova",
     locale: "fr_CD",
     type: "website",
+    images: [
+      {
+        url: "https://archangeshotel.com/images/hotel/hotel-1.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "Archanges Hôtel Minova - Vue sur le lac Kivu",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Archanges Hôtel Minova — Hôtel de luxe au lac Kivu",
+    description: "Hébergement haut de gamme à Minova, Sud-Kivu. Réservez votre séjour de luxe au bord du lac Kivu.",
+    images: ["https://archangeshotel.com/images/hotel/hotel-1.jpg"],
   },
 };
 

@@ -34,7 +34,7 @@ export function Hero() {
         >
           <Image
             src={HERO_IMAGES[index]}
-            alt="Archanges Hôtel"
+            alt="Archanges Hôtel Minova - Vue panoramique sur le lac Kivu, hôtel de luxe au Sud-Kivu RDC"
             fill
             priority
             className="object-cover object-center scale-105"

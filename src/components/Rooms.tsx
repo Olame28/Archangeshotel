@@ -42,7 +42,7 @@ export function Rooms() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={room.image}
-                  alt={room.name}
+                  alt={`Archanges Hôtel Minova - ${room.name}, chambre de luxe au lac Kivu Sud-Kivu`}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-110"
                   sizes="(max-width: 1024px) 100vw, 33vw"
