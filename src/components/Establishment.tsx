@@ -129,18 +129,18 @@ export function Establishment() {
               onClick={() => setShowMenu(!showMenu)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative inline-flex items-center gap-4 px-12 py-6 rounded-full bg-gradient-to-r from-navy via-navy-light to-navy shadow-2xl hover:shadow-3xl hover:shadow-gold/30 transition-all duration-500 group"
+              className="relative inline-flex items-center gap-3 sm:gap-4 px-8 sm:px-12 py-5 sm:py-6 rounded-full bg-gradient-to-r from-navy via-navy-light to-navy shadow-2xl hover:shadow-3xl hover:shadow-gold/30 transition-all duration-500 group"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/20 via-transparent to-gold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <Sparkles className="h-6 w-6 text-gold animate-pulse" />
-              <span className="relative font-sans text-lg font-bold uppercase tracking-widest text-cream">
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-gold animate-pulse" />
+              <span className="relative font-sans text-base sm:text-lg font-bold uppercase tracking-widest text-cream">
                 {showMenu ? "Masquer le Menu" : "Voir notre Menu"}
               </span>
               <motion.div
                 animate={{ rotate: showMenu ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <ChevronDown className="h-6 w-6 text-gold" />
+                <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6 text-gold" />
               </motion.div>
             </motion.button>
           </div>
@@ -155,7 +155,7 @@ export function Establishment() {
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 pt-8">
+                <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6 sm:pt-8">
                   {RESTAURANT_MENU.map((dish, idx) => (
                     <motion.div
                       key={dish.id}
@@ -164,9 +164,9 @@ export function Establishment() {
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
                       whileHover={{ y: -8, scale: 1.02 }}
-                      className="group relative h-96 rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
+                      className="group relative h-80 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
                     >
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-36 sm:h-48 overflow-hidden">
                         <Image
                           src={dish.image}
                           alt={dish.name}
@@ -176,27 +176,27 @@ export function Establishment() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
                         
-                        <div className="absolute top-4 right-4 bg-gold/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                          <span className="font-sans text-xs font-bold uppercase tracking-widest text-navy">
+                        <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gold/95 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg">
+                          <span className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-widest text-navy">
                             {dish.category}
                           </span>
                         </div>
                       </div>
 
-                      <div className="p-6">
-                        <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors">
+                      <div className="p-4 sm:p-6">
+                        <h3 className="font-serif text-lg sm:text-xl text-navy mb-2 sm:mb-3 group-hover:text-gold transition-colors">
                           {dish.name}
                         </h3>
-                        <p className="font-sans text-sm leading-relaxed text-navy/70 mb-4 line-clamp-2">
+                        <p className="font-sans text-xs sm:text-sm leading-relaxed text-navy/70 mb-3 sm:mb-4 line-clamp-2">
                           {dish.description}
                         </p>
                         
-                        <div className="flex items-center justify-between pt-4 border-t border-navy/10">
+                        <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-navy/10">
                           <div className="flex items-baseline gap-1">
-                            <span className="font-serif text-3xl font-bold text-gold">${dish.price}</span>
+                            <span className="font-serif text-2xl sm:text-3xl font-bold text-gold">${dish.price}</span>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold group-hover:text-navy transition-all">
-                            <ArrowRight className="h-5 w-5 text-navy/60 group-hover:text-navy" />
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold group-hover:text-navy transition-all">
+                            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-navy/60 group-hover:text-navy" />
                           </div>
                         </div>
                       </div>
@@ -237,7 +237,7 @@ export function Establishment() {
             </div>
           </Reveal>
 
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-8 sm:gap-12 grid-cols-1 lg:grid-cols-2">
             {RECEPTION_HALLS.map((hall, idx) => (
               <motion.article
                 key={hall.id}
@@ -245,25 +245,25 @@ export function Establishment() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-all hover:border-gold/30"
+                className="group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 transition-all hover:border-gold/30"
               >
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-2 text-gold mb-3">
-                    <PartyPopper className="h-5 w-5" strokeWidth={1.5} />
-                    <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-gold/80">
+                    <PartyPopper className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />
+                    <span className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold/80">
                       Capacité : {hall.capacity} personnes
                     </span>
                   </div>
-                  <h3 className="font-serif text-3xl text-white mb-4">{hall.name}</h3>
-                  <p className="font-sans text-base leading-relaxed text-white/70 mb-6">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-white mb-3 sm:mb-4">{hall.name}</h3>
+                  <p className="font-sans text-sm sm:text-base leading-relaxed text-white/70 mb-4 sm:mb-6">
                     {hall.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-3 mb-8">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
                     {hall.features.map((f) => (
                       <span
                         key={f}
-                        className="text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-3 py-1 rounded-full"
+                        className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-2 sm:px-3 py-1 rounded-full"
                       >
                         {f}
                       </span>
@@ -278,7 +278,7 @@ export function Establishment() {
 
                   <Link
                     href="/reservation"
-                    className="mt-6 inline-flex min-h-[52px] items-center justify-center gap-3 w-full rounded-full bg-gold px-8 font-sans text-xs font-bold tracking-widest text-navy transition hover:bg-white active:scale-95"
+                    className="mt-4 sm:mt-6 inline-flex min-h-[48px] sm:min-h-[52px] items-center justify-center gap-3 w-full rounded-full bg-gold px-6 sm:px-8 font-sans text-[10px] sm:text-xs font-bold tracking-widest text-navy transition hover:bg-white active:scale-95"
                   >
                     Réserver cette salle <Calendar className="h-4 w-4" />
                   </Link>

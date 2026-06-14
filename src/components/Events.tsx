@@ -83,21 +83,21 @@ export function Events() {
               <Calendar className="h-6 w-6 text-gold" />
               <h3 className="font-serif text-2xl uppercase tracking-wider text-navy">{t("events.upcoming")}</h3>
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2">
               {upcomingEvents.map((event, idx) => (
                 <motion.div
                   key={event.id}
                   initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="flex flex-col gap-6 rounded-2xl border border-navy/8 bg-white p-4 shadow-lg sm:flex-row"
+                  className="flex flex-col gap-4 sm:gap-6 rounded-xl sm:rounded-2xl border border-navy/8 bg-white p-3 sm:p-4 shadow-lg sm:flex-row"
                 >
-                  <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-xl sm:h-auto sm:w-48 sm:min-h-[12rem]">
+                  <div className="relative h-40 sm:h-48 w-full shrink-0 overflow-hidden rounded-lg sm:rounded-xl sm:h-auto sm:w-48 sm:min-h-[12rem]">
                     <Image src={event.image} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 200px" />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <span className="mb-2 text-xs font-bold uppercase tracking-widest text-gold">{event.date}</span>
-                    <h4 className="mb-3 font-serif text-xl text-navy">{event.title}</h4>
+                    <span className="mb-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold">{event.date}</span>
+                    <h4 className="mb-2 sm:mb-3 font-serif text-lg sm:text-xl text-navy">{event.title}</h4>
                     <p className="mb-4 text-sm leading-relaxed text-navy/65">{event.description}</p>
                   </div>
                 </motion.div>
@@ -118,7 +118,7 @@ export function Events() {
               </div>
             </div>
 
-            <ul className="grid gap-8 md:grid-cols-2">
+            <ul className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2">
               {pastEvents.map((event, idx) => {
                 const hasVideo = Boolean(event.isVideo && youtubeIdFromEvent(event));
                 const label = hasVideo ? t("events.open_video") : t("events.open_album");
@@ -134,7 +134,7 @@ export function Events() {
                     <button
                       type="button"
                       onClick={() => openViewer(event)}
-                      className="group relative w-full rounded-3xl overflow-hidden bg-white shadow-2xl transition-all hover:shadow-3xl hover:shadow-gold/10"
+                      className="group relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-2xl transition-all hover:shadow-3xl hover:shadow-gold/10"
                     >
                       <div className="relative aspect-[16/10] overflow-hidden">
                         <Image
@@ -148,8 +148,8 @@ export function Events() {
                         
                         {hasVideo && (
                           <span className="absolute inset-0 flex items-center justify-center bg-navy/30 transition group-hover:bg-navy/20">
-                            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold/95 backdrop-blur-sm text-navy shadow-2xl transition-transform group-hover:scale-110">
-                              <Play className="ml-1 h-10 w-10 fill-current" />
+                            <span className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gold/95 backdrop-blur-sm text-navy shadow-2xl transition-transform group-hover:scale-110">
+                              <Play className="ml-1 h-8 w-8 sm:h-10 sm:w-10 fill-current" />
                             </span>
                           </span>
                         )}

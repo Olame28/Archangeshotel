@@ -93,7 +93,7 @@ export function Services() {
           </div>
         </Reveal>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
@@ -102,17 +102,17 @@ export function Services() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative h-full rounded-3xl bg-gradient-to-br from-white to-white/50 backdrop-blur-sm border border-navy/10 p-8 shadow-2xl transition-all hover:shadow-3xl hover:shadow-gold/10 hover:border-gold/30"
+              className="group relative h-full rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white to-white/50 backdrop-blur-sm border border-navy/10 p-5 sm:p-8 shadow-2xl transition-all hover:shadow-3xl hover:shadow-gold/10 hover:border-gold/30"
             >
-              <div className={`mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${s.color} transition-all group-hover:scale-110 group-hover:rotate-6 shadow-lg`}>
-                <s.icon className={`h-10 w-10 ${s.iconColor}`} strokeWidth={1.5} />
+              <div className={`mb-4 sm:mb-6 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br ${s.color} transition-all group-hover:scale-110 group-hover:rotate-6 shadow-lg`}>
+                <s.icon className={`h-8 w-8 sm:h-10 sm:w-10 ${s.iconColor}`} strokeWidth={1.5} />
               </div>
-              <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors">{s.title}</h3>
-              <p className="font-sans text-sm leading-relaxed text-navy/70">
+              <h3 className="font-serif text-lg sm:text-xl text-navy mb-2 sm:mb-3 group-hover:text-gold transition-colors">{s.title}</h3>
+              <p className="font-sans text-xs sm:text-sm leading-relaxed text-navy/70">
                 {s.text}
               </p>
               
-              <div className="absolute inset-0 border-4 border-transparent group-hover:border-gold/20 transition-all duration-500 rounded-3xl pointer-events-none" />
+              <div className="absolute inset-0 border-2 sm:border-4 border-transparent group-hover:border-gold/20 transition-all duration-500 rounded-2xl sm:rounded-3xl pointer-events-none" />
             </motion.div>
           ))}
         </div>
