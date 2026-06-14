@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Sparkles, Star } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -20,6 +20,9 @@ export function Hero() {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
+
+  const nextImage = () => setIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+  const prevImage = () => setIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
 
   return (
     <section id="accueil" className="relative h-[85vh] min-h-[600px] overflow-hidden flex items-center bg-navy scroll-mt-24">
@@ -47,6 +50,17 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="flex items-center justify-center gap-2 mb-6"
+          >
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-5 w-5 text-gold fill-current animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />
+            ))}
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,15 +90,16 @@ export function Hero() {
           >
             <Link
               href="/reservation"
-              className="inline-flex min-h-[56px] items-center justify-center rounded-full bg-gold px-10 font-sans text-sm font-bold uppercase tracking-widest text-navy transition-all hover:bg-gold-muted active:scale-95 shadow-lg shadow-gold/20"
+              className="group relative inline-flex min-h-[56px] items-center justify-center gap-3 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold px-10 font-sans text-sm font-bold uppercase tracking-widest text-navy transition-all hover:scale-105 hover:shadow-2xl hover:shadow-gold/30 active:scale-95"
             >
+              <Sparkles className="h-5 w-5 animate-pulse" />
               {t("hero.book")}
             </Link>
             <Link
               href="https://www.google.com/maps?q=Minova,Sud-Kivu,DRC"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-10 font-sans text-sm font-bold uppercase tracking-widest text-white backdrop-blur-md transition-all hover:bg-white/10 active:scale-95"
+              className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur-md px-10 font-sans text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/20 hover:border-white/60 active:scale-95"
             >
               <MapPin className="h-4 w-4" />
               {t("hero.find")}
@@ -97,7 +112,7 @@ export function Hero() {
                   document.getElementById("restaurant")?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               }}
-              className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-10 font-sans text-sm font-bold uppercase tracking-widest text-white backdrop-blur-md transition-all hover:bg-white/10 active:scale-95"
+              className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur-md px-10 font-sans text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white/20 hover:border-white/60 active:scale-95"
             >
               {t("hero.explore")} <ArrowRight className="h-4 w-4" />
             </Link>
@@ -105,18 +120,45 @@ export function Hero() {
         </div>
       </div>
 
+      {/* Navigation Buttons */}
+      <motion.button
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        onClick={prevImage}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all hover:scale-110"
+        aria-label="Image précédente"
+      >
+        <ArrowRight className="h-6 w-6 text-white rotate-180" />
+      </motion.button>
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        onClick={nextImage}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all hover:scale-110"
+        aria-label="Image suivante"
+      >
+        <ArrowRight className="h-6 w-6 text-white" />
+      </motion.button>
+
       {/* Slide Indicators */}
-      <div className="absolute bottom-10 right-10 flex gap-2">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+        className="absolute bottom-10 right-10 flex gap-3"
+      >
         {HERO_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={`h-1 transition-all duration-500 rounded-full ${
-              i === index ? "w-8 bg-gold" : "w-3 bg-white/30"
+            className={`h-2.5 transition-all duration-500 rounded-full ${
+              i === index ? "w-10 bg-gold shadow-lg shadow-gold/50" : "w-2.5 bg-white/30 hover:bg-white/50"
             }`}
           />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
