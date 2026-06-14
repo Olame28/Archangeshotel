@@ -1,39 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { UtensilsCrossed, Heart, PartyPopper, Camera, Check, ArrowRight, Calendar, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { UtensilsCrossed, Heart, PartyPopper, Camera, Check, ArrowRight, Calendar, Star, ChevronDown, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { HallGallery } from "@/components/HallGallery";
 import { useLanguage } from "@/context/LanguageContext";
-import { RESTAURANT_IMAGES, RESTAURANT_MENU, HALLS_IMAGES, RECEPTION_HALLS } from "@/data/content";
+import { RESTAURANT_IMAGES, RESTAURANT_MENU, RECEPTION_HALLS } from "@/data/content";
 
 const restaurantImg = RESTAURANT_IMAGES[0];
-const hallImg = RECEPTION_HALLS[0].image;
-const hall2Img = RECEPTION_HALLS[1].image;
 const photoSpaceImg = RESTAURANT_IMAGES[4];
-
-const halls = [
-  {
-    key: "malaika",
-    nameKey: "halls.malaika",
-    subtitleKey: "halls.malaika_subtitle",
-    descKey: "halls.malaika_desc",
-    image: RECEPTION_HALLS[0].image,
-    tagsKey: "halls.malaika_tags" as const,
-  },
-  {
-    key: "arche",
-    nameKey: "halls.arche",
-    subtitleKey: "halls.arche_subtitle",
-    descKey: "halls.arche_desc",
-    image: RECEPTION_HALLS[1].image,
-    tagsKey: "halls.arche_tags" as const,
-  },
-];
 
 export function Establishment() {
   const { t } = useLanguage();
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <div className="bg-cream">
@@ -141,56 +123,91 @@ export function Establishment() {
             </div>
           </Reveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {RESTAURANT_MENU.map((dish, idx) => (
+          {/* Menu Button */}
+          <div className="text-center">
+            <motion.button
+              onClick={() => setShowMenu(!showMenu)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative inline-flex items-center gap-4 px-12 py-6 rounded-full bg-gradient-to-r from-navy via-navy-light to-navy shadow-2xl hover:shadow-3xl hover:shadow-gold/30 transition-all duration-500 group"
+            >
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/20 via-transparent to-gold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Sparkles className="h-6 w-6 text-gold animate-pulse" />
+              <span className="relative font-sans text-lg font-bold uppercase tracking-widest text-cream">
+                {showMenu ? "Masquer le Menu" : "Voir notre Menu"}
+              </span>
               <motion.div
-                key={dish.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group relative h-96 rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
+                animate={{ rotate: showMenu ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={dish.image}
-                    alt={dish.name}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
-                  
-                  <div className="absolute top-4 right-4 bg-gold/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                    <span className="font-sans text-xs font-bold uppercase tracking-widest text-navy">
-                      {dish.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors">
-                    {dish.name}
-                  </h3>
-                  <p className="font-sans text-sm leading-relaxed text-navy/70 mb-4 line-clamp-2">
-                    {dish.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-4 border-t border-navy/10">
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-serif text-3xl font-bold text-gold">${dish.price}</span>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold group-hover:text-navy transition-all">
-                      <ArrowRight className="h-5 w-5 text-navy/60 group-hover:text-navy" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <ChevronDown className="h-6 w-6 text-gold" />
               </motion.div>
-            ))}
+            </motion.button>
           </div>
+
+          {/* Menu Grid */}
+          <AnimatePresence>
+            {showMenu && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 pt-8">
+                  {RESTAURANT_MENU.map((dish, idx) => (
+                    <motion.div
+                      key={dish.id}
+                      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="group relative h-96 rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
+                    >
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={dish.image}
+                          alt={dish.name}
+                          fill
+                          className="object-cover transition duration-700 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
+                        
+                        <div className="absolute top-4 right-4 bg-gold/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                          <span className="font-sans text-xs font-bold uppercase tracking-widest text-navy">
+                            {dish.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-6">
+                        <h3 className="font-serif text-xl text-navy mb-3 group-hover:text-gold transition-colors">
+                          {dish.name}
+                        </h3>
+                        <p className="font-sans text-sm leading-relaxed text-navy/70 mb-4 line-clamp-2">
+                          {dish.description}
+                        </p>
+                        
+                        <div className="flex items-center justify-between pt-4 border-t border-navy/10">
+                          <div className="flex items-baseline gap-1">
+                            <span className="font-serif text-3xl font-bold text-gold">${dish.price}</span>
+                          </div>
+                          <div className="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center group-hover:bg-gold group-hover:text-navy transition-all">
+                            <ArrowRight className="h-5 w-5 text-navy/60 group-hover:text-navy" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="mt-16 text-center">
             <Link
@@ -220,57 +237,50 @@ export function Establishment() {
             </div>
           </Reveal>
 
-          <div className="grid gap-8 lg:grid-cols-2">
-            {halls.map((h, idx) => (
+          <div className="grid gap-12 lg:grid-cols-2">
+            {RECEPTION_HALLS.map((hall, idx) => (
               <motion.article
-                key={h.key}
-                initial={{ opacity: 0, y: 20 }}
+                key={hall.id}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="group relative flex flex-col overflow-hidden rounded-2xl bg-white/5 border border-white/10 transition-all hover:border-gold/30"
+                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white/5 border border-white/10 transition-all hover:border-gold/30"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={h.image}
-                    alt={t(h.nameKey)}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-colors" />
-                </div>
                 <div className="p-8">
                   <div className="flex items-center gap-2 text-gold mb-3">
                     <PartyPopper className="h-5 w-5" strokeWidth={1.5} />
                     <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-gold/80">
-                      {t(h.subtitleKey)}
+                      Capacité : {hall.capacity} personnes
                     </span>
                   </div>
-                  <h3 className="font-serif text-2xl text-white mb-4">{t(h.nameKey)}</h3>
-                  <p className="font-sans text-sm leading-relaxed text-white/70 mb-6">
-                    {t(h.descKey)}
+                  <h3 className="font-serif text-3xl text-white mb-4">{hall.name}</h3>
+                  <p className="font-sans text-base leading-relaxed text-white/70 mb-6">
+                    {hall.description}
                   </p>
                   
                   <div className="flex flex-wrap gap-3 mb-8">
-                    {t(h.tagsKey)
-                      .split("|")
-                      .map((f) => f.trim())
-                      .filter(Boolean)
-                      .map((f) => (
-                        <span
-                          key={f}
-                          className="text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-3 py-1 rounded-full"
-                        >
-                          {f}
-                        </span>
-                      ))}
+                    {hall.features.map((f) => (
+                      <span
+                        key={f}
+                        className="text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-3 py-1 rounded-full"
+                      >
+                        {f}
+                      </span>
+                    ))}
                   </div>
+
+                  <HallGallery
+                    images={hall.images}
+                    video={hall.video}
+                    name={hall.name}
+                  />
 
                   <Link
                     href="/reservation"
-                    className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-gold px-8 font-sans text-xs font-bold tracking-widest text-navy transition hover:bg-white active:scale-95"
+                    className="mt-6 inline-flex min-h-[52px] items-center justify-center gap-3 w-full rounded-full bg-gold px-8 font-sans text-xs font-bold tracking-widest text-navy transition hover:bg-white active:scale-95"
                   >
-                    {t("halls.book")} <Calendar className="h-4 w-4" />
+                    Réserver cette salle <Calendar className="h-4 w-4" />
                   </Link>
                 </div>
               </motion.article>

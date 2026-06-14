@@ -66,9 +66,11 @@ export const PHOTOSHOOT_IMAGES = [
 ];
 
 // SALLES D'ÉVÉNEMENTS - Images des salles de réception
+// Placez vos images dans public/images/halls/
+// Dimensions recommandées : 1400x900px (16:9) ou 1400x1050px (4:3), < 500 Ko
 export const HALLS_IMAGES = [
-  "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1400&q=80", // Salle Arche de Noé
-  "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=1400&q=80", // Salle Malaika
+  "/images/halls/hall-malaika-1.jpg", // Salle Malaika - photo principale
+  "/images/halls/hall-arche-1.jpg", // Salle Arche de Noé - photo principale
 ];
 
 export const RECEPTION_HALLS = [
@@ -77,7 +79,12 @@ export const RECEPTION_HALLS = [
     name: "Salle Malaika",
     capacity: 100,
     description: "Réunions & Séminaires",
-    image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "/images/halls/hall-malaika-1.jpg",
+      "/images/halls/hall-malaika-2.jpg",
+      "/images/halls/hall-malaika-3.jpg",
+    ], // Ajoutez autant de photos que vous voulez
+    video: "/images/halls/hall-malaika-video.mp4", // Optionnel : vidéo de la salle
     features: ["Projecteur", "Insonorisation", "Pause-café", "Configuration flexible"],
   },
   {
@@ -85,7 +92,12 @@ export const RECEPTION_HALLS = [
     name: "Salle Arche de Noé",
     capacity: 500,
     description: "Mariages & Grands événements",
-    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "/images/halls/hall-arche-1.jpg",
+      "/images/halls/hall-arche-2.jpg",
+      "/images/halls/hall-arche-3.jpg",
+    ], // Ajoutez autant de photos que vous voulez
+    video: "/images/halls/hall-arche-video.mp4", // Optionnel : vidéo de la salle
     features: ["Scène", "Climatisation", "Traiteur", "Sonorisation", "Configuration modulable"],
   },
 ];
@@ -260,45 +272,6 @@ export const EVENTS = [
       "https://img.youtube.com/vi/d7yRJFqAvsw/0.jpg",
     ],
     link: "https://www.youtube.com/watch?v=d7yRJFqAvsw",
-  },
-  {
-    id: 2,
-    title: "Mariage Royal",
-    date: "2024",
-    type: "past",
-    icon: "Heart",
-    photoCount: 12,
-    image: "/images/events/event-2.jpg",
-    photos: [
-      "/images/events/event-2.jpg",
-      "/images/events/event-2-bis.jpg",
-    ],
-  },
-  {
-    id: 3,
-    title: "Séminaire Régional",
-    date: "2024",
-    type: "past",
-    icon: "BookOpen",
-    photoCount: 8,
-    image: "/images/events/event-3.jpg",
-    photos: [
-      "/images/events/event-3.jpg",
-      "/images/events/event-3-bis.jpg",
-    ],
-  },
-  {
-    id: 4,
-    title: "Shooting Mode Lac",
-    date: "2024",
-    type: "past",
-    icon: "Camera",
-    photoCount: 20,
-    image: "/images/events/event-4.jpg",
-    photos: [
-      "/images/events/event-4.jpg",
-      "/images/events/event-4-bis.jpg",
-    ],
   },
 ];
 

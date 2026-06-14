@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe, Bell } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { site, logoPath } from "@/lib/site";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -20,14 +20,8 @@ function scrollToId(id: string) {
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [showEvent, setShowEvent] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const { lang, setLang, t } = useLanguage();
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowEvent(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -74,29 +68,6 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/97 shadow-lg" : "bg-white/90"} backdrop-blur-md border-b ${isScrolled ? "border-navy/15" : "border-transparent"}`}
     >
-      <AnimatePresence>
-        {showEvent && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="relative overflow-hidden bg-gold py-2 px-4 text-center"
-          >
-            <p className="flex items-center justify-center gap-3 font-sans text-[11px] font-black uppercase tracking-[0.2em] text-navy">
-              <Bell className="h-3.5 w-3.5 shrink-0 animate-bounce" />
-              <span className="min-w-0">
-                {lang === "fr"
-                  ? "Événement : Gala de louanges et adorations - Dimanche 2 mai !"
-                  : "Event: Gala of praise and worship - Sunday May 2nd!"}
-              </span>
-              <button type="button" onClick={() => setShowEvent(false)} className="ml-2 shrink-0 hover:scale-110 transition-transform" aria-label="Fermer">
-                <X className="h-4 w-4" />
-              </button>
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <div
         className={`mx-auto flex max-w-screen-2xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? "py-2" : "py-4"}`}
       >
