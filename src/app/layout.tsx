@@ -3,6 +3,7 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { GlobalChrome } from "@/components/GlobalChrome";
+import { Analytics } from "@vercel/analytics/next";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -62,6 +63,7 @@ export default function RootLayout({
           {children}
           <GlobalChrome />
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );
