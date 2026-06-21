@@ -356,6 +356,12 @@ export const RESERVATION_TYPES = [
     icon: "Camera",
     description: "Réserver une séance photo",
   },
+  {
+    id: "excursion",
+    label: "Excursion Lac Kivu",
+    icon: "Sailboat",
+    description: "Réserver une excursion en canon rapide",
+  },
 ];
 
 // ÉTABLISSEMENT - Restaurant + Salles + Espace photo

@@ -43,3 +43,28 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ success: false }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  const session = req.cookies.get("admin_session");
+  if (session?.value !== "active") {
+    return NextResponse.json({ success: false }, { status: 401 });
+  }
+
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    
+    if (!id) {
+      return NextResponse.json({ success: false, message: "ID requis" }, { status: 400 });
+    }
+
+    await prisma.reservation.delete({
+      where: { id },
+    });
+    
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return NextResponse.json({ success: false }, { status: 500 });
+  }
+}

@@ -424,6 +424,7 @@ const translations: Record<Language, Record<string, string>> = {
     "booking.res_type.restaurant": "Restaurant",
     "booking.res_type.event": "Event hall",
     "booking.res_type.photoshoot": "Photoshoot",
+    "booking.res_type.excursion": "Lake Kivu Excursion",
     "booking.ph_country": "e.g. DRC, Rwanda, France…",
     "booking.ph_id": "As shown on the document",
     "booking.ph_purpose": "Leisure, business, seminar, wedding…",

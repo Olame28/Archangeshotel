@@ -5,6 +5,7 @@ import { Events } from "@/components/Events";
 import { Gallery } from "@/components/Gallery";
 import { Rooms } from "@/components/Rooms";
 import { LakeKivu } from "@/components/LakeKivu";
+import { Excursion } from "@/components/Excursion";
 import { ReservationPromo } from "@/components/ReservationPromo";
 import { PaymentSection } from "@/components/PaymentSection";
 import { Services } from "@/components/Services";
@@ -25,6 +26,7 @@ export default function HomePage() {
         <Gallery />
         <Rooms />
         <LakeKivu />
+        <Excursion />
         <ReservationPromo />
         <PaymentSection />
         <Services />

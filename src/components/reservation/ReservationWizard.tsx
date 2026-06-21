@@ -11,6 +11,7 @@ import {
   UtensilsCrossed,
   Megaphone,
   Camera,
+  Sailboat,
   Calendar,
   Check,
   CheckCircle2,
@@ -85,6 +86,7 @@ export function ReservationWizard() {
       restaurant: UtensilsCrossed,
       event: Megaphone,
       photoshoot: Camera,
+      excursion: Sailboat,
     };
     const Icon = map[type];
     return Icon ? <Icon className="h-5 w-5 shrink-0" /> : null;

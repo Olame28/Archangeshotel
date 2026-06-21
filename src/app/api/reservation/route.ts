@@ -141,6 +141,7 @@ export async function POST(req: NextRequest) {
       restaurant: "Restaurant",
       event: "Salle d'événement",
       photoshoot: "Séance photo",
+      excursion: "Excursion Lac Kivu",
     };
 
     const paymentLabels: Record<string, string> = {
@@ -206,29 +207,59 @@ export async function POST(req: NextRequest) {
     const clientEmailContent = isEn
       ? `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #060f1b;">
-        <h2 style="color: #1a365d;">Thank you, ${escapeHtml(plainName)}.</h2>
-        <p>We have received your <strong>${escapeHtml(typeLabels[type] || type)}</strong> request.</p>
-        <p>Our team will check availability and contact you shortly. This message does not constitute a firm confirmation.</p>
-        <p>Reservation ID: ${reservation.id}</p>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 style="color: #1a365d; margin: 0;">Archanges Hôtel</h2>
+          <p style="color: #c5a059; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 0 0;">Notre différence, votre référence</p>
+        </div>
+        <h3 style="color: #1a365d;">Thank you, ${escapeHtml(plainName)}.</h3>
+        <p style="line-height: 1.6;">We have received your <strong>${escapeHtml(typeLabels[type] || type)}</strong> request.</p>
+        <p style="line-height: 1.6;">Our team will check availability and contact you shortly to confirm your booking and discuss payment options.</p>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 24px 0;">
+          <p style="margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Reservation Details</p>
+          <p style="margin: 0; font-size: 14px;"><strong>ID:</strong> ${reservation.id}</p>
+          <p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Type:</strong> ${escapeHtml(typeLabels[type] || type)}</p>
+          ${type === "room" ? `<p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Dates:</strong> ${e(checkin)} → ${e(checkout)}</p>` : ""}
+          <p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Guests:</strong> ${guests}</p>
+        </div>
+        <p style="line-height: 1.6; color: #64748b; font-size: 14px;">
+          <strong>Payment Information:</strong><br>
+          Once your reservation is confirmed, our team will provide you with payment options including mobile money (M-Pesa, Airtel Money, Orange Money) and bank transfer details.
+        </p>
         <hr style="margin: 28px 0; border: none; border-top: 1px solid #e2e8f0;">
-        <p style="color: #64748b; font-size: 14px;">
-          Archanges Hôtel<br>
+        <p style="color: #64748b; font-size: 13px;">
+          <strong>Archanges Hôtel</strong><br>
           Minova — Budondo, route Bulenga, Sud-Kivu, DRC<br>
-          Tel: +243 997 721 582 / +243 991 570 543
+          Tel: +243 997 721 582 / +243 991 570 543<br>
+          Email: reservations@archangeshotel.com
         </p>
       </div>
     `
       : `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #060f1b;">
-        <h2 style="color: #1a365d;">Merci, ${escapeHtml(plainName)}.</h2>
-        <p>Nous avons bien reçu votre demande pour : <strong>${escapeHtml(typeLabels[type] || type)}</strong>.</p>
-        <p>Notre équipe vérifie la disponibilité et vous recontacte rapidement. Ce message ne vaut pas confirmation ferme.</p>
-        <p>ID Réservation : ${reservation.id}</p>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 style="color: #1a365d; margin: 0;">Archanges Hôtel</h2>
+          <p style="color: #c5a059; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 0 0;">Notre différence, votre référence</p>
+        </div>
+        <h3 style="color: #1a365d;">Merci, ${escapeHtml(plainName)}.</h3>
+        <p style="line-height: 1.6;">Nous avons bien reçu votre demande pour : <strong>${escapeHtml(typeLabels[type] || type)}</strong>.</p>
+        <p style="line-height: 1.6;">Notre équipe vérifie la disponibilité et vous recontacte rapidement pour confirmer votre réservation et discuter des options de paiement.</p>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 24px 0;">
+          <p style="margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #64748b;">Détails de la réservation</p>
+          <p style="margin: 0; font-size: 14px;"><strong>ID :</strong> ${reservation.id}</p>
+          <p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Type :</strong> ${escapeHtml(typeLabels[type] || type)}</p>
+          ${type === "room" ? `<p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Dates :</strong> ${e(checkin)} → ${e(checkout)}</p>` : ""}
+          <p style="margin: 8px 0 0 0; font-size: 14px;"><strong>Personnes :</strong> ${guests}</p>
+        </div>
+        <p style="line-height: 1.6; color: #64748b; font-size: 14px;">
+          <strong>Informations de paiement :</strong><br>
+          Une fois votre réservation confirmée, notre équipe vous communiquera les options de paiement disponibles, notamment le mobile money (M-Pesa, Airtel Money, Orange Money) et les coordonnées bancaires.
+        </p>
         <hr style="margin: 28px 0; border: none; border-top: 1px solid #e2e8f0;">
-        <p style="color: #64748b; font-size: 14px;">
-          Archanges Hôtel<br>
+        <p style="color: #64748b; font-size: 13px;">
+          <strong>Archanges Hôtel</strong><br>
           Minova — Budondo, route Bulenga, Sud-Kivu, RDC<br>
-          Tél. : +243 997 721 582 / +243 991 570 543
+          Tél. : +243 997 721 582 / +243 991 570 543<br>
+          Email : reservations@archangeshotel.com
         </p>
       </div>
     `;
