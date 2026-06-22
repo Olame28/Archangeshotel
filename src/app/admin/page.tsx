@@ -48,8 +48,17 @@ type Reservation = {
   message: string;
   createdAt: string;
   repliedAt?: string;
-  room?: { name: string };
-  hall?: { name: string };
+  room?: { name: string; price: number };
+  hall?: { name: string; price: number };
+  countryOfOrigin?: string;
+  nationality?: string;
+  idDocument?: string;
+  cityOfProvenance?: string;
+  stayPurpose?: string;
+  paymentMode?: string;
+  companyName?: string;
+  companyContact?: string;
+  adminNotes?: string;
 };
 
 type Room = { id: number; name: string; price: number; type: string };
