@@ -1,18 +1,21 @@
 @import "tailwindcss";
 
-/**
- * Thème Archanges : bleu nuit, or, crème.
- * Titres : Playfair Display (layout). Corps : DM Sans (layout).
- */
 :root {
   --cream: #e4eaf0;
   --cream-dark: #e4d7ad;
   --navy: #060f1b;
   --navy-light: #1a1b4b;
   --gold: #d1a72a;
+  --gold-light: #e8c547;
   --gold-muted: #b68e21;
   --background: var(--cream);
   --foreground: var(--navy);
+  --theme-primary: var(--gold);
+  --theme-secondary: var(--navy);
+  --theme-accent: var(--cream-dark);
+  --theme-bg: var(--cream);
+  --theme-text: var(--navy);
+  --theme-radius: 24px;
 }
 
 @theme inline {
@@ -21,6 +24,7 @@
   --color-navy: var(--navy);
   --color-navy-light: var(--navy-light);
   --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
   --color-gold-muted: var(--gold-muted);
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
@@ -30,9 +34,83 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
 ::selection {
   background: color-mix(in srgb, var(--gold) 35%, transparent);
   color: var(--navy);
 }
+
+/* ── Theme layout variants ── */
+.theme-classic .section-pad { @apply py-20 sm:py-28; }
+.theme-modern .section-pad { @apply py-16 sm:py-20; }
+.theme-luxury .section-pad { @apply py-28 sm:py-36; }
+.theme-minimal .section-pad { @apply py-12 sm:py-16; }
+.theme-nature .section-pad { @apply py-24 sm:py-32; }
+.theme-african .section-pad { @apply py-20 sm:py-28; }
+.theme-glass .section-pad { @apply py-20 sm:py-28; }
+.theme-editorial .section-pad { @apply py-16 sm:py-24; }
+.theme-bold .section-pad { @apply py-14 sm:py-20; }
+.theme-romantic .section-pad { @apply py-24 sm:py-32; }
+
+.theme-card {
+  border-radius: var(--theme-radius);
+}
+
+body[data-card="sharp"] .theme-card { border-radius: 0; }
+body[data-card="glass"] .theme-card {
+  background: color-mix(in srgb, var(--theme-bg) 60%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
+}
+body[data-card="bordered"] .theme-card {
+  border: 2px solid color-mix(in srgb, var(--theme-primary) 30%, transparent);
+  box-shadow: none;
+}
+body[data-card="elevated"] .theme-card {
+  box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--theme-secondary) 25%, transparent);
+}
+
+body[data-animation="none"] *, body[data-animation="none"] *::before, body[data-animation="none"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+body[data-animation="dynamic"] .theme-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* African pattern overlay */
+body[data-theme="african"] .theme-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--theme-primary) 0,
+    var(--theme-primary) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 20px 20px;
+}
+
+/* Film grain for luxury */
+body[data-theme="luxury"] .theme-root::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.font-heading { font-family: var(--font-heading, var(--font-serif)); }
+.font-body { font-family: var(--font-body, var(--font-sans)); }

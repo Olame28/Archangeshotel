@@ -62,33 +62,41 @@ export function HallGallery({ images, video, name }: HallGalleryProps) {
         <>
           {/* Main Image */}
           <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-2xl bg-navy/20">
-            <Image
-              src={images[0]}
-              alt={`${name} - Photo principale`}
-              fill
-              className="object-contain"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            {images[0] ? (
+              <Image
+                src={images[0]}
+                alt={`${name} - Photo principale`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full text-white/40">
+                Aucune image disponible
+              </div>
+            )}
           </div>
 
           {/* Thumbnail Gallery */}
           {images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {images.slice(0, 8).map((img, idx) => (
-                <motion.button
-                  key={idx}
-                  onClick={() => setSelectedImage(idx)}
-                  whileHover={{ scale: 1.05 }}
-                  className="relative w-full h-16 overflow-hidden rounded-lg border-2 border-transparent hover:border-gold transition-colors"
-                >
-                  <Image
-                    src={img}
-                    alt={`${name} - Photo ${idx + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 25vw, 12.5vw"
-                  />
-                </motion.button>
+                img ? (
+                  <motion.button
+                    key={idx}
+                    onClick={() => setSelectedImage(idx)}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative w-full h-16 overflow-hidden rounded-lg border-2 border-transparent hover:border-gold transition-colors"
+                  >
+                    <Image
+                      src={img}
+                      alt={`${name} - Photo ${idx + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 25vw, 12.5vw"
+                    />
+                  </motion.button>
+                ) : null
               ))}
               {images.length > 8 && (
                 <button
@@ -107,20 +115,22 @@ export function HallGallery({ images, video, name }: HallGalleryProps) {
         /* Grid View */
         <div className="grid grid-cols-2 gap-2">
           {images.map((img, idx) => (
-            <motion.button
-              key={idx}
-              onClick={() => setSelectedImage(idx)}
-              whileHover={{ scale: 1.05 }}
-              className="relative w-full h-32 overflow-hidden rounded-lg border-2 border-transparent hover:border-gold transition-colors"
-            >
-              <Image
-                src={img}
-                alt={`${name} - Photo ${idx + 1}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-            </motion.button>
+            img ? (
+              <motion.button
+                key={idx}
+                onClick={() => setSelectedImage(idx)}
+                whileHover={{ scale: 1.05 }}
+                className="relative w-full h-32 overflow-hidden rounded-lg border-2 border-transparent hover:border-gold transition-colors"
+              >
+                <Image
+                  src={img}
+                  alt={`${name} - Photo ${idx + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+              </motion.button>
+            ) : null
           ))}
         </div>
       )}
@@ -169,13 +179,19 @@ export function HallGallery({ images, video, name }: HallGalleryProps) {
             </button>
 
             <div className="relative w-full h-full max-w-6xl max-h-[90vh] p-8">
-              <Image
-                src={images[selectedImage]}
-                alt={`${name} - Photo ${selectedImage + 1}`}
-                fill
-                className="object-contain"
-                sizes="100vw"
-              />
+              {images[selectedImage] ? (
+                <Image
+                  src={images[selectedImage]}
+                  alt={`${name} - Photo ${selectedImage + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full text-white/40">
+                  Image non disponible
+                </div>
+              )}
             </div>
 
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full">

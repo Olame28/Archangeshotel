@@ -25,7 +25,8 @@ import {
   FileText,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { ROOMS, RECEPTION_HALLS, RESERVATION_TYPES } from "@/data/content";
+import { useSiteData } from "@/context/SiteContext";
+import { RESERVATION_TYPES } from "@/data/content";
 import { site } from "@/lib/site";
 import { notifyStaffActivity } from "@/lib/staff-notify";
 import type { PaymentMode, ReservationData, ValidationErrors } from "./reservationTypes";
@@ -62,6 +63,7 @@ function nightsBetween(checkin: string, checkout: string): number {
 
 export function ReservationWizard() {
   const { t, lang } = useLanguage();
+  const { rooms, halls } = useSiteData();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<ReservationData>(() => emptyReservation());
   const [errors, setErrors] = useState<ValidationErrors>({});
@@ -71,12 +73,8 @@ export function ReservationWizard() {
   const nights = useMemo(() => nightsBetween(data.checkin, data.checkout), [data.checkin, data.checkout]);
 
   const roomDisplayName = (id: number) => {
-    const m: Record<number, string> = {
-      1: t("rooms.standard"),
-      2: t("rooms.deluxe"),
-      3: t("rooms.vip"),
-    };
-    return m[id] ?? "";
+    const room = rooms.find((r) => r.id === id);
+    return room ? room.name : "";
   };
 
   const typeLabel = (id: string) => t(`booking.res_type.${id}`);
@@ -94,14 +92,14 @@ export function ReservationWizard() {
 
   const hallLabel = (id: string) => {
     const n = parseInt(id, 10);
-    const h = RECEPTION_HALLS.find((x) => x.id === n);
+    const h = halls.find((x) => x.id === n);
     return h ? `${h.name} (${h.capacity})` : id;
   };
 
   const roomLine = () => {
     const id = parseInt(String(data.roomType), 10);
-    const room = ROOMS.find((r) => r.id === id);
-    return room ? `${roomDisplayName(room.id)} · $${room.price}` : "";
+    const room = rooms.find((r) => r.id === id);
+    return room ? `${room.name} · $${room.price}` : "";
   };
 
   const handleChange = (
@@ -421,7 +419,7 @@ export function ReservationWizard() {
                             onChange={handleChange}
                             className={inputClass}
                           >
-                            {ROOMS.map((room) => (
+                            {rooms.map((room) => (
                               <option key={room.id} value={String(room.id)}>
                                 {roomDisplayName(room.id)} — ${room.price} / {t("booking.per_night")}
                               </option>
@@ -441,7 +439,7 @@ export function ReservationWizard() {
                             onChange={handleChange}
                             className={inputClass}
                           >
-                            {RECEPTION_HALLS.map((hall) => (
+                            {halls.map((hall) => (
                               <option key={hall.id} value={String(hall.id)}>
                                 {hall.name} — {hall.capacity}{" "}
                                 {lang === "en" ? "guests max." : "places max."}

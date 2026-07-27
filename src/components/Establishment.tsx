@@ -8,13 +8,15 @@ import { UtensilsCrossed, Heart, PartyPopper, Camera, Check, ArrowRight, Calenda
 import { Reveal } from "@/components/Reveal";
 import { HallGallery } from "@/components/HallGallery";
 import { useLanguage } from "@/context/LanguageContext";
-import { RESTAURANT_IMAGES, RESTAURANT_MENU, RECEPTION_HALLS } from "@/data/content";
-
-const restaurantImg = RESTAURANT_IMAGES[0];
-const photoSpaceImg = RESTAURANT_IMAGES[4];
+import { useSiteData } from "@/context/SiteContext";
 
 export function Establishment() {
   const { t } = useLanguage();
+  const { restaurantImages, menuItems, halls, get } = useSiteData();
+  const restaurantImg = restaurantImages[0] || "/images/restaurant/restaurant-1.jpg";
+  const photoSpaceImg = restaurantImages[4] || restaurantImages[0] || restaurantImg;
+  const RESTAURANT_MENU = menuItems;
+  const RECEPTION_HALLS = halls;
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -66,7 +68,7 @@ export function Establishment() {
                 <UtensilsCrossed className="h-8 w-8" strokeWidth={1} />
                 <span className="font-serif text-2xl">{t("restaurant.tagline")}</span>
               </div>
-              <p className="font-sans text-lg leading-relaxed text-navy/80 italic border-l-3 border-gold pl-5 mb-6">
+              <p className="font-sans text-lg leading-relaxed text-navy/80 italic border-l-4 border-gold pl-5 mb-6">
                 "{t("restaurant.quote")}"
               </p>
               <p className="font-sans text-base leading-relaxed text-navy/70 mb-8">
@@ -167,15 +169,20 @@ export function Establishment() {
                       className="group relative h-80 sm:h-96 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer bg-white"
                     >
                       <div className="relative h-36 sm:h-48 overflow-hidden">
-                        <Image
-                          src={dish.image}
-                          alt={dish.name}
-                          fill
-                          className="object-cover transition duration-700 group-hover:scale-110"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
-                        
+                        {dish.image ? (
+                          <>
+                            <Image
+                              src={dish.image}
+                              alt={dish.name}
+                              fill
+                              className="object-cover transition duration-700 group-hover:scale-110"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
+                          </>
+                        ) : (
+                          <div className="absolute inset-0 bg-navy/10" />
+                        )}
                         <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gold/95 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg">
                           <span className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-widest text-navy">
                             {dish.category}

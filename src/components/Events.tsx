@@ -5,11 +5,22 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, History, ChevronLeft, ChevronRight, Play, X, Images, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { EVENTS } from "@/data/content";
+import { useSiteData } from "@/context/SiteContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { youtubeVideoIdFromUrl } from "@/lib/youtube";
 
-type HotelEvent = (typeof EVENTS)[number];
+type HotelEvent = {
+  id: string;
+  title: string;
+  description?: string;
+  date?: string;
+  image?: string;
+  link?: string;
+  isVideo?: boolean;
+  type?: string;
+  photos?: string[];
+  photoCount?: number;
+};
 
 function youtubeIdFromEvent(event: HotelEvent): string | null {
   if (event.link) {
@@ -23,6 +34,18 @@ function youtubeIdFromEvent(event: HotelEvent): string | null {
 
 export function Events() {
   const { t } = useLanguage();
+  const { events: siteEvents } = useSiteData();
+  const EVENTS: HotelEvent[] = siteEvents.map((e) => ({
+    id: e.id,
+    title: e.title,
+    description: e.description,
+    date: e.date,
+    image: e.image,
+    link: e.link,
+    isVideo: e.isVideo,
+    type: e.type,
+    photos: e.photos.length ? e.photos : e.image ? [e.image] : [],
+  }));
   const [viewer, setViewer] = useState<HotelEvent | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -93,7 +116,7 @@ export function Events() {
                   className="flex flex-col gap-4 sm:gap-6 rounded-xl sm:rounded-2xl border border-navy/8 bg-white p-3 sm:p-4 shadow-lg sm:flex-row"
                 >
                   <div className="relative h-40 sm:h-48 w-full shrink-0 overflow-hidden rounded-lg sm:rounded-xl sm:h-auto sm:w-48 sm:min-h-[12rem]">
-                    <Image src={event.image} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 200px" />
+                    <Image src={event.image || "/images/hotel/hotel-1.jpg"} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 200px" />
                   </div>
                   <div className="flex flex-col justify-center">
                     <span className="mb-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-gold">{event.date}</span>
@@ -138,7 +161,7 @@ export function Events() {
                     >
                       <div className="relative aspect-[16/10] overflow-hidden">
                         <Image
-                          src={event.image}
+                          src={event.image || "/images/hotel/hotel-1.jpg"}
                           alt=""
                           fill
                           className="object-cover transition duration-700 group-hover:scale-110"
@@ -242,7 +265,7 @@ export function Events() {
                 ) : (
                   <div className="relative aspect-[16/10] w-full bg-navy sm:aspect-[16/9]">
                     <Image
-                      src={viewerPhotos[photoIndex] ?? viewer.image}
+                      src={viewerPhotos[photoIndex] ?? viewer.image ?? "/images/hotel/hotel-1.jpg"}
                       alt=""
                       fill
                       className="object-contain"

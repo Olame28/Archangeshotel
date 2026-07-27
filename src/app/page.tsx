@@ -1,37 +1,12 @@
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { Establishment } from "@/components/Establishment";
-import { Events } from "@/components/Events";
-import { Gallery } from "@/components/Gallery";
-import { Rooms } from "@/components/Rooms";
-import { LakeKivu } from "@/components/LakeKivu";
-import { Excursion } from "@/components/Excursion";
-import { ReservationPromo } from "@/components/ReservationPromo";
-import { PaymentSection } from "@/components/PaymentSection";
-import { Services } from "@/components/Services";
-import { Footer } from "@/components/Footer";
+import { SiteProvider } from "@/context/SiteContext";
+import { getSiteData } from "@/lib/site-data";
+import { SitePage } from "@/components/layout/SitePage";
 
-/**
- * Page d’accueil — Archanges Hôtel (Sud-Kivu).
- * Ordre : Hero → Établissement (restaurant, salles, espace photo) → Événements → Galerie → Chambres → Lac Kivu (court) → …
- */
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await getSiteData();
   return (
-    <>
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Establishment />
-        <Events />
-        <Gallery />
-        <Rooms />
-        <LakeKivu />
-        <Excursion />
-        <ReservationPromo />
-        <PaymentSection />
-        <Services />
-      </main>
-      <Footer />
-    </>
+    <SiteProvider data={data}>
+      <SitePage />
+    </SiteProvider>
   );
 }

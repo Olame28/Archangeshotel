@@ -30,12 +30,12 @@ export const HOTEL_LOGO = "/logo-archanges.png";
 // HERO - Photos du carrousel accueil (6 images)
 // Dimensions recommandées : 1920 x 1080 px (16:9), < 500 Ko
 export const HERO_IMAGES = [
-  "/images/hotel/hotel-1.jpg",
-  "/images/hotel/hotel-2.jpg",
-  "/images/hotel/hotel-3.jpg",
-  "/images/hotel/hotel-4.jpg",
-  "/images/hotel/hotel-5.jpg",
-  "/images/hotel/hotel-6.jpg",
+  "/images/gallery/gallery-1.jpg",
+  "/images/gallery/gallery-2.jpg",
+  "/images/gallery/gallery-3.jpg",
+  "/images/gallery/gallery-4.jpg",
+  "/images/gallery/gallery-5.jpg",
+  "/images/gallery/gallery-6.jpg",
 ];
 
 // GALERIE - Photos pour la galerie (8 images, grille masonry)
@@ -53,16 +53,16 @@ export const GALLERY_IMAGES = [
 
 // RESTAURANT - Photos pour l'album restaurant Maman Rica
 export const RESTAURANT_IMAGES = [
-  "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1550966841-3ee5ad60d0d9?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+  "/images/gallery/gallery-1.jpg",
+  "/images/gallery/gallery-2.jpg",
+  "/images/gallery/gallery-3.jpg",
+  "/images/gallery/gallery-4.jpg",
+  "/images/gallery/gallery-5.jpg",
 ];
 
 // PHOTOSHOOT - Photos séances photos espace vert au bord du lac
 export const PHOTOSHOOT_IMAGES = [
-  "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
+  "/images/gallery/gallery-6.jpg",
 ];
 
 // SALLES D'ÉVÉNEMENTS - Images des salles de réception
@@ -109,7 +109,7 @@ export const ROOMS = [
     price: 50,
     description: "Confortable et accueillante",
     amenities: ["Balcon privé", "Wi-Fi", "Smart TV", "Vue sur jardins"],
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gallery/gallery-7.jpg",
   },
   {
     id: 2,
@@ -117,7 +117,7 @@ export const ROOMS = [
     price: 100,
     description: "Spacieuse et luxueuse",
     amenities: ["Balcon privé", "Wi-Fi", "Smart TV", "Minibar", "Salle de bain spacieuse"],
-    image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gallery/gallery-8.jpg",
   },
   {
     id: 3,
@@ -125,7 +125,7 @@ export const ROOMS = [
     price: 150,
     description: "L'excellence du luxe",
     amenities: ["Salon séparé", "Baignoire", "Vue panoramique lac", "Service butler", "Minibar premium"],
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gallery/gallery-1.jpg",
   },
 ];
 
@@ -138,7 +138,7 @@ export const RESTAURANT_MENU = [
     price: 18,
     category: "Plats Principaux",
     icon: "🐟",
-    image: "https://images.unsplash.com/photo-1534939561126-855b8675edd7?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-1.jpg",
   },
   {
     id: 2,
@@ -147,7 +147,7 @@ export const RESTAURANT_MENU = [
     price: 22,
     category: "Plats Principaux",
     icon: "🥩",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-2.jpg",
   },
   {
     id: 3,
@@ -156,7 +156,7 @@ export const RESTAURANT_MENU = [
     price: 14,
     category: "Plats Principaux",
     icon: "🥜",
-    image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-3.jpg",
   },
   {
     id: 4,
@@ -165,7 +165,7 @@ export const RESTAURANT_MENU = [
     price: 16,
     category: "Plats Principaux",
     icon: "🍗",
-    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-4.jpg",
   },
   {
     id: 5,
@@ -174,7 +174,7 @@ export const RESTAURANT_MENU = [
     price: 6,
     category: "Accompagnements",
     icon: "🥖",
-    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-5.jpg",
   },
   {
     id: 6,
@@ -183,7 +183,7 @@ export const RESTAURANT_MENU = [
     price: 5,
     category: "Accompagnements",
     icon: "🌾",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-6.jpg",
   },
   {
     id: 7,
@@ -192,7 +192,7 @@ export const RESTAURANT_MENU = [
     price: 8,
     category: "Entrées",
     icon: "🥗",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-7.jpg",
   },
   {
     id: 8,
@@ -201,7 +201,7 @@ export const RESTAURANT_MENU = [
     price: 12,
     category: "Entrées",
     icon: "🍢",
-    image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80",
+    image: "/images/gallery/gallery-8.jpg",
   },
 ];
 
@@ -265,13 +265,13 @@ export const EVENTS = [
     icon: "Calendar",
     description: "Concert d'Évangélisation avec l'Évangéliste Eustache DUNIA",
     // Dimensions recommandées : 1200 x 800 px (3:2), < 300 Ko
-    image: "https://img.youtube.com/vi/d7yRJFqAvsw/0.jpg",
-    isVideo: true,
+    image: "/images/gallery/gallery-1.jpg",
+    isVideo: false,
     photoCount: 1,
     photos: [
-      "https://img.youtube.com/vi/d7yRJFqAvsw/0.jpg",
+      "/images/gallery/gallery-1.jpg",
     ],
-    link: "https://www.youtube.com/watch?v=d7yRJFqAvsw",
+    link: "",
   },
 ];
 
@@ -369,12 +369,12 @@ export const ESTABLISHMENT_CONTENT = {
   restaurant: {
     title: "Maman Rica",
     subtitle: "Gastronomie & Saveurs",
-    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gallery/gallery-1.jpg",
   },
   photoshoot: {
     title: "Espace Créatif",
     subtitle: "Lumière & Décor",
-    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/gallery/gallery-6.jpg",
   }
 };
 
@@ -383,18 +383,18 @@ export const LAKE_KIVU_ACTIVITIES = [
     id: 1,
     name: "Balade en Bateau",
     description: "Découvrez les beautés du lac",
-    image: "https://images.unsplash.com/photo-1500514966906-fe245eea9344?auto=format&fit=crop&w=400&h=300&q=80",
+    image: "/images/lake-kivu.jpg",
   },
   {
     id: 2,
     name: "Pêche Traditionnelle",
     description: "Expérience authentique",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&h=300&q=80",
+    image: "/images/lake-kivu.jpg",
   },
   {
     id: 3,
     name: "Coucher de Soleil",
     description: "Moments magiques",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&h=300&q=80",
+    image: "/images/lake-kivu.jpg",
   },
 ];

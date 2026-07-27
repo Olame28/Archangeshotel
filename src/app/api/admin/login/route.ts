@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
     // On définit un cookie simple pour la session (en prod, utilisez un vrai JWT)
     response.cookies.set("admin_session", "active", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
+      sameSite: "lax",
       maxAge: 60 * 60 * 24, // 24 heures
       path: "/",
     });

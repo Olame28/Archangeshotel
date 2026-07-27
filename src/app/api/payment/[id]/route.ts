@@ -22,8 +22,7 @@ export async function GET(
 
     return NextResponse.json({ success: true, reservation });
   } catch (error) {
-    console.error("Payment fetch error:", error);
-    return NextResponse.json({ success: false, message: "Erreur serveur" }, { status: 500 });
+    return NextResponse.json({ success: false, message: error instanceof Error ? error.message : 'Erreur serveur' }, { status: 500 });
   }
 }
 
@@ -53,7 +52,6 @@ export async function PATCH(
 
     return NextResponse.json({ success: true, message: "Paiement enregistré" });
   } catch (error) {
-    console.error("Payment update error:", error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }

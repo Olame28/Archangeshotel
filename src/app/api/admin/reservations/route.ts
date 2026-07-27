@@ -21,8 +21,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ success: true, reservations });
   } catch (error) {
-    console.error("Admin fetch error:", error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
 
@@ -40,7 +39,7 @@ export async function PATCH(req: NextRequest) {
     });
     return NextResponse.json({ success: true, reservation: updated });
   } catch (error) {
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }
 
@@ -64,7 +63,6 @@ export async function DELETE(req: NextRequest) {
     
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Delete error:", error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }

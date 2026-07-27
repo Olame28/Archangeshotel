@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { RECEPTION_HALLS, ROOMS } from "@/data/content";
 import { prisma } from "@/lib/prisma";
 
 function escapeHtml(s: string | undefined | null): string {
@@ -13,15 +12,17 @@ function escapeHtml(s: string | undefined | null): string {
     .replace(/'/g, "&#039;");
 }
 
-function roomLabelById(id: string | undefined): string {
+async function roomLabelById(id: string | undefined): Promise<string> {
   const n = parseInt(String(id), 10);
-  const room = ROOMS.find((r) => r.id === n);
+  if (Number.isNaN(n)) return String(id ?? "");
+  const room = await prisma.room.findUnique({ where: { id: n } });
   return room ? `${room.name} ($${room.price}/nuit)` : String(id ?? "");
 }
 
-function hallLabelById(id: string | undefined): string {
+async function hallLabelById(id: string | undefined): Promise<string> {
   const n = parseInt(String(id), 10);
-  const hall = RECEPTION_HALLS.find((h) => h.id === n);
+  if (Number.isNaN(n)) return String(id ?? "");
+  const hall = await prisma.hall.findUnique({ where: { id: n } });
   return hall ? `${hall.name} (${hall.capacity} places)` : String(id ?? "");
 }
 
@@ -150,18 +151,20 @@ export async function POST(req: NextRequest) {
     };
 
     const e = escapeHtml;
+    const roomLabel = await roomLabelById(roomType);
+    const hallLabel = await hallLabelById(hallType);
     const roomBlock =
       type === "room"
         ? `
       <p><strong>Date d'arrivée:</strong> ${e(checkin)}</p>
       <p><strong>Date de départ:</strong> ${e(checkout)}</p>
-      <p><strong>Type de chambre:</strong> ${e(roomLabelById(roomType))}</p>
+      <p><strong>Type de chambre:</strong> ${e(roomLabel)}</p>
     `
         : "";
     const hallBlock =
       type === "event"
         ? `
-      <p><strong>Salle:</strong> ${e(hallLabelById(hallType))}</p>
+      <p><strong>Salle:</strong> ${e(hallLabel)}</p>
     `
         : "";
 
@@ -275,9 +278,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, message: "Réservation envoyée avec succès", id: reservation.id });
   } catch (error) {
-    console.error("Erreur lors de l'envoi de la réservation:", error);
     return NextResponse.json(
-      { success: false, message: "Erreur lors de l'envoi de la réservation" },
+      { success: false, message: error instanceof Error ? error.message : "Erreur lors de l'envoi de la réservation" },
       { status: 500 }
     );
   }
